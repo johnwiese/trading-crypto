@@ -1,0 +1,276 @@
+
+
+<!doctype html>
+<!--
+  Copyright 2015 Google Inc. All rights reserved.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      https://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Learn how to predict Crypto Trends">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <meta name="description" content="Cryptocurreny prediction and trading" />
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/global.css" />
+  <!-- Load Stripe.js on your website. -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <title>Crypto Trading</title>
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Crypto Trading">
+  <meta name="theme-color" content="#303F9F">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Crypto Trading">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
+
+  <!-- Tile icon for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+  <meta name="msapplication-navbutton-color" content="#303F9F">
+
+  <!-- Material Design Lite -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+  <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+  <!-- App Styling -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- StockCharts -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.7/d3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.17.0/babel.min.js"></script>
+
+    <!-- <script type="text/javascript" src="//unpkg.com/react-stockcharts@latest/dist/react-stockcharts.min.js"></script> -->
+    <script type="text/javascript" src="//rrag.github.io/react-stockcharts/dist/react-stockcharts.min.js"></script>
+
+
+   <style>
+    .mainText {
+    background-color:rgb(236, 236, 235);
+    border-radius: 10px; 
+    padding:10px; 
+    margin: 10px; 
+    font-family:medium-content-serif-font, Georgia, Cambria, 'Times New Roman', Times, serif;
+    letter-spacing: -0.004em;line-height: 1.58;
+    color: rgba(0, 0, 0, 0.84);
+    margin-top: 40px;
+    padding:20px;
+    padding-top:40px;
+    font-size:20px;
+    font-weight: 400;
+    height: 600px;
+   }
+   .mainText p{
+   font-size:20px
+   }
+  .mainText p span{
+    font-size:2em; 
+    font-style:bold;
+   }
+  
+  
+   
+   </style>
+  </head>
+  <body>
+   <!-- Header section containing logo -->
+   <header style="height:168px; background-color: #97B386" class="mdl-layout__header mdl-color-text--white ">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+        <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+          <h3><img width="896px" height="136px" src="./images/logo.png"></h3>
+        </div>
+        <div id="user-container">
+          <div hidden id="user-pic"></div>
+          <div hidden id="user-name"></div>
+          <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+            Sign-out
+          </button>
+          <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+            <i class="material-icons">account_circle</i>Sign-in with Google
+          </button>
+        </div>
+      </div>
+    </header>
+    <div class="sr-root">
+       
+      <div class="demo-layout ">
+          <div id="chart">
+            </div>
+            <script>
+              // Use babel transform so the examples work on the browser
+              d3.request("./CandleStickChartWithMA.jsx")
+                .get(function(err, data) {
+                  var outputEl = document.getElementById('chart');
+                  try {
+                    var output = Babel.transform(data.responseText, { presets: ["es2015", "react", "stage-3"] }).code;
+                    eval(output);
+                  } catch (ex) {
+                    outputEl.innerHTML = 'ERROR: ' + ex.message;
+                  }
+                })
+            </script>
+    
+    <div class="mdl-layout mainText"  >
+    <p><span style="font-size:2em; font-style:bold">The worst of the downsides to the crypto-currencies </span></p>
+    <p> market being unregulated is that the prices are highly volatile. Double-digit percent changes in these prices occur every single day.  Of course, mistakes can be devastating.</p>
+
+    <p>It is becoming well known that AI and Machine Learning have made leaps and bounds in this arena. </p>
+    <span style="font-size:2em; font-style:bold;">AI and ML making trading easier:</span>
+    <p>Their power lies in 3 things: Their lack of emotional involvement in their analysis; the capacity to see underlying patterns quickly in large data sets; and their increasing sophistication and ability take into account diverse types of input data.</p>
+    <p>One way to trade your way to a million is to master all the technical aspects of this market, which takes years of dedicated study and risk-laden practice. .</p>
+    <p>By using AI and ML, a bot can analyze the current trend in the crypto market and where the price might go based on the past performances. 
+    Findings can then be used to place trades accordingly. </p>
+    <span style="font-size:2em; font-style:bold;">This can help you place winning trades and show you objective insights into the market.</span></p>
+    </div>
+          
+              <div class="sr-main" style="display: flex;position:absolute; text-align:center;right:-1000px">
+                <header class="sr-header">
+                  <div class="sr-header__logo"></div>
+                </header>
+                <div class="sr-container" >
+                  <section class="container basic-photo">
+                    <div>
+                      <h1>Basic subscription</h1>
+                      <h4>Plan A for 2 weeks</h4>
+                      <div class="pasha-image">
+                        <img
+                          src="./images/stripePanel.jpg"
+                          width="170"
+                          height="140"
+                        />
+                      </div>
+                    </div>
+                    <button id="basic-btn">$20.00 per week</button>
+                  </section>
+                  <section class="container pro-photo">
+                    <div>
+                      <h1>Pro subscription</h1>
+                      <h4>Plan B for 2 weeks</h4>
+                      <div class="pasha-image">
+                        <img
+                          src="./images/stripePanel.jpg"
+                          width="170"
+                          height="140"
+                        />
+      
+                    </div>
+                    <button id="pro-btn">$40.00 per week</button>
+                  </section>
+                </div>
+                <div id="error-message"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12 col-md-12 warning">
+                  <p class="a-link">
+                    <a href="" target="_blank" class="bold">Privacy Policy | </a>
+                    <a href="" target="_blank" class="bold"> Product Disclosure Statement | </a>
+                    <a href="" class="bold"> Complaints Procedure | </a>
+                    <a href="" target="_blank" class="bold"> Risk Disclosure Statement | </a>
+                    <a href="" target="_blank" class="bold"> Client Agreement | </a>
+                    <a href="" target="_blank" class="bold"> Financial Services Guide | </a>
+                    <a href="" target="_blank" class="bold">Hedging Counterparties Policy</a>
+                  </p>
+            
+                  <p class="de" style="font-weight: 400">Risk Warning: etc 
+                    <i class="ti-lock"></i>&nbsp; Secured by SSL. © CryptoTrading Copyright. All rights reserved.
+                  </p>
+                </div>
+              </div>
+    
+  </div>
+  
+
+
+  <script>
+    // Replace with your own public key: https://dashboard.stripe.com/test/apikeys
+    var PUBLIC_KEY = "pk_test_IQSmYGUUsj2lCA5WjEl1r0vh00lQVnOX6x";
+    // Replace with the domain you want your users to be redirected back to after payment
+    var DOMAIN = 'https://friendlychat-b2e39.firebaseapp.com';
+    // Replace with a SKU for your own product (created either in the Stripe Dashboard or with the API)
+    var SUBSCRIPTION_BASIC_PLAN_ID = "Crypt1";
+    var SUBSCRIPTION_PRO_PLAN_ID = "Crypt1";
+    if (PUBLIC_KEY === "pk_test_IQSmYGUUsj2lCA5WjEl1r0vh00lQVnOX6x") {
+      console.log(
+        "Replace the hardcoded public key with your own public key: https://dashboard.stripe.com/test/apikeys"
+      );
+    }
+    if (
+      SUBSCRIPTION_BASIC_PLAN_ID === "plan_1234" ||
+      SUBSCRIPTION_PRO_PLAN_ID === "plan_5678"
+    ) {
+      console.log(
+        "Replace the hardcoded plan ID with your own plan: https://stripe.com/docs/api/plans"
+      );
+    }
+    var stripe = Stripe(PUBLIC_KEY);
+    // Handle any errors from Checkout
+    var handleResult = function(result) {
+      if (result.error) {
+        var displayError = document.getElementById("error-message");
+        displayError.textContent = result.error.message;
+      }
+    };
+    var redirectToCheckout = function(planId) {
+      // Make the call to Stripe.js to redirect to the checkout page
+      // with the current quantity
+      stripe
+        .redirectToCheckout({
+          items: [{ plan: SUBSCRIPTION_BASIC_PLAN_ID, quantity: 1 }],
+          successUrl:
+            DOMAIN + "/stockChart.html?session_id={CHECKOUT_SESSION_ID}",
+          cancelUrl: DOMAIN + "/canceled.html"
+        })
+        .then(handleResult);
+    };
+    document
+      .getElementById("basic-btn")
+      .addEventListener("click", function(evt) {
+        redirectToCheckout(SUBSCRIPTION_BASIC_PLAN_ID);
+      });
+    document
+      .getElementById("pro-btn")
+      .addEventListener("click", function(evt) {
+        redirectToCheckout(SUBSCRIPTION_PRO_PLAN_ID);
+      });
+  </script>
+
+<!-- Import and configure the Firebase SDK -->
+<!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+<!-- If you do not want to serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+<script src="/__/firebase/6.4.0/firebase-app.js"></script>
+<script src="/__/firebase/6.4.0/firebase-auth.js"></script>
+<script src="/__/firebase/6.4.0/firebase-storage.js"></script>
+<script src="/__/firebase/6.4.0/firebase-messaging.js"></script>
+<script src="/__/firebase/6.4.0/firebase-firestore.js"></script>
+<script src="/__/firebase/init.js"></script>
+
+<script src="scripts/main.js"></script>
+</body>
+</html>
