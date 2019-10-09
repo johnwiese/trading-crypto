@@ -31,4 +31,4 @@ Add additional features getting ready for product launch.
     * exchanges
     * instruments
     * bar types
-5) Store data and signals in TSDB
+5) Store data and signals in TSDB https://github.com/v3io/tsdb-nuclio
