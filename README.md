@@ -1,6 +1,8 @@
 # trading-crypto Project
 Bitcoin trading signals service for entry and exit signals. Combines Machine Learning and traditional trading methods.
 
+Project Link: https://friendlychat-b2e39.firebaseapp.com/
+
 
 ### Features
 1) React D3 market charting
