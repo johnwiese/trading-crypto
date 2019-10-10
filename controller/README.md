@@ -16,6 +16,7 @@ The controller code is written in python or javascript. And is called via the fr
     * ML price prediction
     * Data from Coinbase
         * Hourly and daily bars
+        https://pro.coinbase.com/
 5) Front end runs controller directly
 
 ## Phase 2
