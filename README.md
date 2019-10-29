@@ -44,7 +44,8 @@ Project Link: https://friendlychat-b2e39.firebaseapp.com/
 ### Directory structure
     Directories contain additional README.md files.
         * frontend - provides user UI/UX code
-        * controller - functions and services for both phases.
+        * controller - functions and services for both phases
+        * model - machine learing perdiction 
         * serverless - Kubeflow, nuclio, Kubernetes, kafka: code and configuration for phase2
         * assets - contains data files and images being used by projects
 
