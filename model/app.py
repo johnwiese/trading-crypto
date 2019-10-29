@@ -1,11 +1,14 @@
-from flask import Flask, render_template, send_from_directory, request, jsonify
-from fastai.tabular import load_learner, add_datepart
-import pandas as pd
-import numpy as np
 from datetime import datetime
 
+import numpy as np
+import pandas as pd
+from fastai.tabular import add_datepart, load_learner
+from flask import Flask, jsonify, render_template, request, send_from_directory
+
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder='public', static_url_path='')
+cors = CORS(app)
 infer = load_learner('.', file='./date_prev_btc_model.pkl')
 
 def pred_single(date, prev, learn=infer):
@@ -31,4 +34,3 @@ if __name__ == "__main__":
     # app.config['TEMPLATES_AUTO_RELOAD'] = True
     # app.run(debug=False)
     app.run(port=8080)
-    
