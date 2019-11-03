@@ -28,7 +28,8 @@ Project Link: https://friendlychat-b2e39.firebaseapp.com/
             - Market bottom and top zones
             - ML price perdictions
             - Entry and exit signals
-    2) Phase 2
+        Final) Add mobile to react
+    2) Phase 2 (Post course plan)
         Productization of service adding additional features and system scalablity
 
         - FaaS (serverless) Architecture
