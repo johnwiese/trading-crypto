@@ -29,7 +29,7 @@ Project Link: https://friendlychat-b2e39.firebaseapp.com/
             - ML price perdictions
             - Entry and exit signals
         Final) Add mobile to react
-    2) Phase 2 (Post course plan)
+    2) Phase 2 (Post course plan) 
         Productization of service adding additional features and system scalablity
 
         - FaaS (serverless) Architecture
